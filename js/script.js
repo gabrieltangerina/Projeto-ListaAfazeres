@@ -27,10 +27,7 @@ const handleAddTask = () =>{
     const taskContent = document.createElement("p")
     taskContent.innerText=inputElement.value
 
-    tasksContainer.addEventListener("click", ()=>{
-        var container = taskContent
-        container.classList.toggle("taskDone")
-    })
+    taskContent.addEventListener("click", () => handleClick(taskContent))
 
     const deleteItem=document.createElement("p")
     deleteItem.setAttribute("class", "buttonDelete")
@@ -41,6 +38,16 @@ const handleAddTask = () =>{
     tasksContainer.appendChild(taskItemContainer)
 
     inputElement.value = ""
+}
+
+const handleClick = (taskContent)=>{
+    const tasks = tasksContainer.childNodes //Vai pegar todos os filhos do tasksContainer
+
+    for(const task of tasks){
+        if(task.firstChild.isSameNode(taskContent)){
+            task.firstChild.classList.toogle("taskDone")
+        }
+    }
 }
 
 const handleInputChange = () =>{
